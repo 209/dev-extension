@@ -1,0 +1,51 @@
+{
+  "manifest_version": 2,
+  "version": "0.0.1",
+  "name": "Dev extension",
+  "minimum_chrome_version": "60.0.3112",
+  "description": "Dev extension",
+  "browser_action": {
+    "default_title": "DEV",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/logo-16.png",
+    "32": "img/logo-32.png",
+    "64": "img/logo-64.png",
+    "128": "img/logo-128.png"
+  },
+  "web_accessible_resources": [
+    "js/injectCommon.bundle.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/injectCommon.bundle.js"
+      ]
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "sockets": {
+    "tcp": {
+      "connect": "0.0.0.0:8000"
+    },
+    "tcpServer": {
+      "listen": "0.0.0.0:8000"
+    }
+  },
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "storage",
+    "tabs",
+    "contextMenus"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/analytics.js https://sentry.io/api/ https://browser.sentry-cdn.com/4.6.4/bundle.min.js https://localhost:3000 https://localhost:8000 https://0.0.0.0:3000 https://0.0.0.0:8000 http://localhost:3000 http://localhost:8000 http://0.0.0.0:3000 http://0.0.0.0:8000"
+}
