@@ -1,15 +1,13 @@
-import { all } from 'redux-saga/effects';
+import { all, takeLatest } from 'redux-saga/effects';
+import { init as browsersInitSaga } from '../browser/saga';
+import * as actionTypes from './actionTypes';
 
-function* init({ url }) {
-  try {
-
-  } catch (e) {
-
-  }
+function* init() {
+  yield browsersInitSaga();
 }
 
 export default function* commonSaga() {
   yield all([
-
+    takeLatest(actionTypes.INIT, init),
   ]);
 }

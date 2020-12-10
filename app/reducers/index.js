@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import chrome from '../stores/browser/reducer';
+import browser from '../stores/browser/reducer';
 import common from '../stores/common/reducer';
+import activeTab from '../stores/activeTab/reducer';
 import errorLog from '../stores/errorLog/reducer';
 
 export default combineReducers({
-  chrome,
+  browser,
   common,
+  activeTab,
   errorLog,
 });

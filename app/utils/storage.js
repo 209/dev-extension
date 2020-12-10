@@ -1,5 +1,7 @@
+import browser from 'webextension-polyfill';
+
 function saveState(state) {
-  chrome.storage.local.set({ state: JSON.stringify(state) });
+  browser.storage.local.set({ state: JSON.stringify(state) });
 }
 
 export default function () {
@@ -15,12 +17,12 @@ export default function () {
 
 export function setToSyncStorage(data) {
   return new Promise((resolve) => {
-    chrome.storage.sync.set(data, resolve);
+    browser.storage.sync.set(data, resolve);
   });
 }
 
 export function getFromSyncStorage(keys) {
   return new Promise((resolve) => {
-    chrome.storage.sync.get(keys, resolve);
+    browser.storage.sync.get(keys, resolve);
   });
 }

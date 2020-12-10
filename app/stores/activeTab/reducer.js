@@ -1,18 +1,24 @@
 import * as actionTypes from './actionTypes';
 
 const initialState = {
-  isProcessing: false,
+  editorInfo: false,
 };
 
 const actionsMap = {
-  [actionTypes.INIT](state, action) {
+  [actionTypes.UPDATE](state, { editor }) {
     return {
       ...state,
+      editorInfo: editor.editorInfo,
+    };
+  },
+  [actionTypes.CLEAR]() {
+    return {
+      ...initialState,
     };
   },
 };
 
-export default function commonReducer(state = initialState, action) {
+export default function activeTabReducer(state = initialState, action) {
   const reduceFn = actionsMap[action.type];
   if (!reduceFn) return state;
   return reduceFn(state, action);

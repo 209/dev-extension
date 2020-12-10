@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as backgroundActions from '../../stores/browser/actions';
+import * as commonActions from '../../stores/common/actions';
 
 @connect(
   (state) => ({ state }),
   (dispatch) => ({
-    backgroundActions:   bindActionCreators(backgroundActions, dispatch),
+    actions: bindActionCreators(commonActions, dispatch),
   }),
 )
 class App extends Component {
+  // eslint-disable-next-line react/static-property-placement
   static propTypes = {
-    backgroundActions:   PropTypes.object,
+    actions:   PropTypes.object,
   };
 
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
+
+    props.actions.init();
   }
 
   render() {

@@ -1,0 +1,2 @@
+export const TAB_IS_EDITOR = 'TAB_IS_EDITOR';
+export const GET_DATA_FROM_ACTIVE_TAB = 'GET_DATA_FROM_ACTIVE_TAB';

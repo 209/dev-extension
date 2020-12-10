@@ -22,7 +22,7 @@ const actionsMap = {
   },
 };
 
-export default function chromeReducer(state = initialState, action) {
+export default function browserReducer(state = initialState, action) {
   const reduceFn = actionsMap[action.type];
   if (!reduceFn) return state;
   return reduceFn(state, action);

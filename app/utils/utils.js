@@ -1,6 +1,6 @@
 export function executeScript(tabId, params) {
   return new Promise((resolve) => {
-    chrome.tabs.executeScript(tabId, params, (result) => {
+    browser.tabs.executeScript(tabId, params, (result) => {
       resolve(result);
     });
   });
@@ -14,7 +14,7 @@ export function delay(time) {
 
 export function openTab(url) {
   return new Promise((resolve) => {
-    chrome.tabs.create({
+    browser.tabs.create({
       url:    url,
       active: true,
     }, ({ id }) => resolve(id));
