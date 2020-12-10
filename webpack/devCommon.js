@@ -11,11 +11,12 @@ module.exports = {
     path:          path.join(__dirname, '../dev/js'),
     filename:      '[name].bundle.js',
     chunkFilename: '[id].chunk.js',
+    publicPath:    '/js/',
   },
   // '*' allows to use: import A from 'file.ext'
   // '.js' allows to use: import B from 'script' (This will import script.js)
   resolve: {
-    extensions: ['*', '.js'],
+    extensions: ['.js', '.jsx'],
   },
 
   plugins: [
@@ -30,7 +31,7 @@ module.exports = {
 
   optimization: {
     minimize:       false,
-    noEmitOnErrors: true,
+    emitOnErrors: true,
   },
 
   module: {
@@ -54,15 +55,18 @@ module.exports = {
           {
             loader:  'css-loader',
             options: {
-              modules:        true,
+              modules:        {
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              },
               importLoaders:  1,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
             },
           },
           {
             loader:  'postcss-loader',
             options: {
-              plugins: () => [autoprefixer],
+              postcssOptions: {
+                plugins: () => [autoprefixer],
+              },
             },
           },
         ],

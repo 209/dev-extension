@@ -4,9 +4,9 @@ exports.copyAssets = (type) => {
   const env = type === 'build' ? 'prod' : type;
   rm('-rf', type);
   mkdir(type);
-  cp(`chrome/manifest.${env}.json`, `${type}/manifest.json`);
+  cp(`browser/manifest.${env}.json`, `${type}/manifest.json`);
   cp('-R', 'browser/assets/*', type);
-  exec(`pug -O "{ env: '${env}' }" -o ${type} chrome/views/`);
+  exec(`pug -O "{ env: '${env}' }" -o ${type} browser/views/`);
 };
 
 exports.copyTinymceSkins = (type) => {

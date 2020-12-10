@@ -1,0 +1,7 @@
+doctype html
+
+html
+  head
+    script(src=env == 'prod' ? '/js/background.bundle.js' : 'http://127.0.0.1:8081/js/background.bundle.js')
+  body
+    #root

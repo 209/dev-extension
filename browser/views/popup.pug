@@ -3,9 +3,12 @@ doctype html
 html
   head
     meta(charset='UTF-8')
-    title Lister (Window)
+    title Lister (Popup)
+    style.
+      body { width: 500px; }
+
   body
     #root
     //if env !== 'prod'
     //  script(src='chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/redux-devtools-extension.js')
-    script(src=env == 'prod' ? '/js/popup.bundle.js' : 'http://localhost:3000/js/popup.bundle.js')
+    script(src=env == 'prod' ? '/js/popup.bundle.js' : 'http://localhost:8081/js/popup.bundle.js')

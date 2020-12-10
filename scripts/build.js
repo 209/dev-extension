@@ -7,4 +7,4 @@ tasks.copyTinymceSkins('build');
 
 console.log('[Webpack Build]');
 console.log('-'.repeat(80));
-exec('webpack --watch --config webpack/prod.config.js --progress --profile --colors');
+exec('webpack --watch --config webpack/prod.config.js --progress --profile --color');

@@ -1,10 +1,12 @@
+import browser from 'webextension-polyfill';
+
 let windowId = 0;
 const CONTEXT_MENU_ID = 'example_context_menu';
 
 function closeIfExist() {
   if (windowId > 0) {
-    chrome.windows.remove(windowId);
-    windowId = chrome.windows.WINDOW_ID_NONE;
+    browser.windows.remove(windowId);
+    windowId = browser.windows.WINDOW_ID_NONE;
   }
 }
 
@@ -19,7 +21,7 @@ function popWindow(type) {
   // };
   if (type === 'open') {
     // options.url = 'window.html';
-    chrome.tabs.create({ url: '/popup.html' });
+    browser.tabs.create({ url: '/popup.html' });
 
     // browser.windows.create(options, (win) => {
     //   windowId = win.id;
@@ -27,14 +29,14 @@ function popWindow(type) {
   }
 }
 
-chrome.contextMenus.create({
+browser.contextMenus.create({
   id:                  CONTEXT_MENU_ID,
   title:               'Lister',
   contexts:            ['all'],
   documentUrlPatterns: [],
 });
 
-chrome.contextMenus.onClicked.addListener((event) => {
+browser.contextMenus.onClicked.addListener((event) => {
   if (event.menuItemId === CONTEXT_MENU_ID) {
     popWindow('open');
   }

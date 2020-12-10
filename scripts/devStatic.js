@@ -4,4 +4,4 @@ require('shelljs/global');
 console.log('[Webpack devStatic: watching for page script changes]');
 console.log('-'.repeat(80));
 
-exec('webpack --watch --config webpack/devStatic.config.js --progress --profile --colors');
+exec('webpack --watch --config webpack/devStatic.config.js --progress --profile --color');

@@ -32,19 +32,12 @@
     "page": "background.html",
     "persistent": true
   },
-  "sockets": {
-    "tcp": {
-      "connect": "0.0.0.0:8000"
-    },
-    "tcpServer": {
-      "listen": "0.0.0.0:8000"
-    }
-  },
   "permissions": [
     "http://*/",
     "https://*/",
     "storage",
-    "tabs"
+    "tabs",
+    "contextMenus"
   ],
-  "content_security_policy": "script-src 'self' https://www.google-analytics.com/analytics.js https://sentry.io/api/ https://browser.sentry-cdn.com/4.6.4/bundle.min.js"
+  "content_security_policy": "object-src 'self'; script-src 'self' https://localhost:8081 https://0.0.0.0:8081 http://localhost:8081/ http://127.0.0.1:8081/ http://0.0.0.0:8081 ws://localhost:8081 'unsafe-eval'"
 }

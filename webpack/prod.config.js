@@ -27,7 +27,6 @@ module.exports = {
   ],
   optimization: {
     minimize:        false,
-    occurrenceOrder: true,
   },
   performance:  {
     maxEntrypointSize: 512000000,
@@ -55,15 +54,18 @@ module.exports = {
           {
             loader:  'css-loader',
             options: {
-              modules:        true,
+              modules:        {
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              },
               importLoaders:  1,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
             },
           },
           {
             loader:  'postcss-loader',
             options: {
-              plugins: () => [autoprefixer],
+              postcssOptions: {
+                plugins: () => [autoprefixer],
+              },
             },
           },
         ],
