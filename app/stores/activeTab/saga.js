@@ -4,12 +4,21 @@ import * as actionTypes from './actionTypes';
 import { update, clear } from './actions';
 
 function* getDataFromActiveTabSaga() {
-  const { editorInfo } = yield call(getDataFromActiveTab);
+  yield call(getDataFromActiveTab);
+}
+
+export function* setDataFromActiveTabSaga(data) {
+  const {
+    editorInfo,
+    sessionStore,
+  } = data;
 
   if (editorInfo) {
-    yield put(update({
+    const action = update({
       editorInfo,
-    }));
+      sessionStore,
+    });
+    yield put(action);
   } else {
     yield put(clear());
   }

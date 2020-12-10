@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as activeTabActions from '../../stores/activeTab/actions';
-import { getEditorInfo } from '../../stores/activeTab/selectors';
+import { getEditorInfo, getSession } from '../../stores/activeTab/selectors';
 import style from './App.css';
 
 @connect(
   (state) => ({
-    editorInfo: getEditorInfo(state),
+    editorInfo:     getEditorInfo(state),
+    session:    getSession(state),
   }),
   (dispatch) => ({
     activeTabActions: bindActionCreators(activeTabActions, dispatch),
@@ -17,7 +18,8 @@ import style from './App.css';
 class App extends Component {
   static propTypes = {
     activeTabActions: PropTypes.object,
-    editorInfo:         PropTypes.string,
+    editorInfo:       PropTypes.string,
+    session:          PropTypes.object,
   };
 
   constructor(props) {
@@ -27,11 +29,37 @@ class App extends Component {
   }
 
   render() {
-    const { editorInfo } = this.props;
+    const { editorInfo, session } = this.props;
+
+    if (!editorInfo) {
+      return (
+        <div className={style.main}>
+          {editorInfo || 'no editor'}
+        </div>
+      );
+    }
+
+    const {
+      project: {
+        projectId,
+        viewerId,
+      },
+    } = session;
 
     return (
       <div className={style.main}>
-        {editorInfo || 'no editor'}
+        <div>
+          <span>devBuildLabel:</span>
+          <span>{editorInfo}</span>
+        </div>
+        <div>
+          <span>projectId:</span>
+          <span>{projectId}</span>
+        </div>
+        <div>
+          <span>viewerId:</span>
+          <span>{viewerId}</span>
+        </div>
       </div>
     );
   }

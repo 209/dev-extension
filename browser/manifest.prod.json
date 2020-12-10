@@ -17,6 +17,9 @@
   "web_accessible_resources": [
     "js/injectCommon.bundle.js"
   ],
+  "externally_connectable": {
+    "matches": ["*://*.pdffiller.com/*"]
+  },
   "content_scripts": [
     {
       "matches": [

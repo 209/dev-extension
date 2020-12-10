@@ -5,10 +5,11 @@ const initialState = {
 };
 
 const actionsMap = {
-  [actionTypes.UPDATE](state, { editor }) {
+  [actionTypes.UPDATE](state, { editorInfo, sessionStore }) {
     return {
       ...state,
-      editorInfo: editor.editorInfo,
+      editorInfo,
+      sessionStore,
     };
   },
   [actionTypes.CLEAR]() {

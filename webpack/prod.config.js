@@ -5,7 +5,7 @@ const autoprefixer = require('autoprefixer');
 const src = '../browser/extension/injects';
 
 module.exports = {
-  mode:         'production',
+  mode:         'development',
   entry:        {
     window:       [path.join(__dirname, '../browser/extension/window')],
     popup:        [path.join(__dirname, '../browser/extension/popup')],
@@ -21,7 +21,7 @@ module.exports = {
     new webpack.IgnorePlugin(/[^/]+\/[\S]+.dev$/),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production'),
+        NODE_ENV: JSON.stringify('development'),
       },
     }),
   ],

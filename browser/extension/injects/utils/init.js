@@ -1,12 +1,10 @@
 import browser from 'webextension-polyfill';
+import deepInject from './deepInject';
 
 export default () => {
-  const script = document.createElement('script');
   const { id } = browser.runtime;
 
-  script.textContent = "(function () {window.devExtensionId = '".concat(id, "'; })();");
-  (document.head || document.documentElement).appendChild(script);
-  script.remove();
+  deepInject("(function () {window.devExtensionId = '".concat(id, "'; })();"));
 
   return new Promise((resolve) => {
     if (window.document.readyState === 'complete') {

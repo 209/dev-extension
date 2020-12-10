@@ -4,15 +4,16 @@ import { eventChannel } from 'redux-saga';
 import { TAB_IS_EDITOR } from '../../../utils/constants';
 import { update } from '../activeTab/actions';
 import getDataFromActiveTab from './utils/getDataFromActiveTab';
+import { setDataFromActiveTabSaga } from '../activeTab/saga';
 
 function* BrowserEventsListener() {
   return eventChannel((emit) => {
     const sendEmit = (data, source) => emit({ data, source });
-    const listener = (data, source, ...otherData) => {
+    const listener = (data, source) => {
       if (!data && !data.method) {
         return;
       }
-      sendEmit(data, source);
+      sendEmit({ data: data.data, method: data.method, source });
     };
 
     browser.runtime.onMessage.addListener(listener);
@@ -29,7 +30,8 @@ export function* init() {
   while (true) {
     const { data, source } = yield take(chromeEventsChannel);
     switch (data.method) {
-      case TAB_IS_EDITOR:
+      case 'dev-extension:deep-inject':
+        yield setDataFromActiveTabSaga(data.data);
         break;
       default:
         break;

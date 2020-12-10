@@ -1,8 +1,9 @@
 import * as types from './actionTypes';
 
-export const update = (editor) => ({
+export const update = ({ editorInfo, sessionStore }) => ({
   type: types.UPDATE,
-  editor,
+  editorInfo,
+  sessionStore,
 });
 
 export const clear = () => ({

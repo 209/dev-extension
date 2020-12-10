@@ -1,4 +1,4 @@
-import * as types from './actionTypes';
+// import * as types from './actionTypes';
 
 // export const activeUrlChanged = (activeUrl) => ({
 //   type: types.ACTIVE_URL_CHANGED,
