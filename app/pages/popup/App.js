@@ -1,28 +1,22 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as activeTabActions from '../../stores/activeTab/actions';
-import { getEditorInfo, getSession } from '../../stores/activeTab/selectors';
+import { getEditorInfo, getProject, getToken } from '../../stores/activeTab/selectors';
+import LocalLink from '../../components/LocalLink';
 import style from './App.css';
 
 @connect(
   (state) => ({
-    editorInfo:     getEditorInfo(state),
-    session:    getSession(state),
+    editorInfo: getEditorInfo(state),
+    project: getProject(state),
+    token: getToken(state),
   }),
   (dispatch) => ({
     activeTabActions: bindActionCreators(activeTabActions, dispatch),
   }),
 )
 class App extends Component {
-  // eslint-disable-next-line react/static-property-placement
-  static propTypes = {
-    activeTabActions: PropTypes.object,
-    editorInfo:       PropTypes.string,
-    session:          PropTypes.object,
-  };
-
   constructor(props) {
     super(props);
 
@@ -30,8 +24,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
-    const { editorInfo, session } = this.props;
+    const { editorInfo, project, token } = this.props;
 
     if (!editorInfo) {
       return (
@@ -41,26 +34,31 @@ class App extends Component {
       );
     }
 
-    const { project } = session;
-
     return (
       <div className={style.main}>
         <div>
           <span>devBuildLabel:</span>
           <span>{editorInfo}</span>
         </div>
-        {project && project.projectId && (
+        {project && (
+          <>
+            <div>
+              <span>projectId:</span>
+              <span>{project.projectId}</span>
+            </div>
+            <div>
+              <span>viewerId:</span>
+              <span>{project.viewerId}</span>
+            </div>
+          </>
+        )}
+        {token && (
           <div>
-            <span>projectId:</span>
-            <span>{project.projectId}</span>
+            <span>token:</span>
+            <span>{token}</span>
           </div>
         )}
-        {project && project.viewerId && (
-          <div>
-            <span>viewerId:</span>
-            <span>{project.viewerId}</span>
-          </div>
-        )}
+        <LocalLink />
       </div>
     );
   }

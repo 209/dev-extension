@@ -22,6 +22,8 @@ const actionsMap = {
 
 export default function activeTabReducer(state = initialState, action) {
   const reduceFn = actionsMap[action.type];
-  if (!reduceFn) return state;
+  if (!reduceFn) {
+    return state;
+  }
   return reduceFn(state, action);
 }
