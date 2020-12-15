@@ -16,6 +16,7 @@ import style from './App.css';
   }),
 )
 class App extends Component {
+  // eslint-disable-next-line react/static-property-placement
   static propTypes = {
     activeTabActions: PropTypes.object,
     editorInfo:       PropTypes.string,
@@ -29,6 +30,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { editorInfo, session } = this.props;
 
     if (!editorInfo) {
@@ -39,12 +41,7 @@ class App extends Component {
       );
     }
 
-    const {
-      project: {
-        projectId,
-        viewerId,
-      },
-    } = session;
+    const { project } = session;
 
     return (
       <div className={style.main}>
@@ -52,14 +49,18 @@ class App extends Component {
           <span>devBuildLabel:</span>
           <span>{editorInfo}</span>
         </div>
-        <div>
-          <span>projectId:</span>
-          <span>{projectId}</span>
-        </div>
-        <div>
-          <span>viewerId:</span>
-          <span>{viewerId}</span>
-        </div>
+        {project && project.projectId && (
+          <div>
+            <span>projectId:</span>
+            <span>{project.projectId}</span>
+          </div>
+        )}
+        {project && project.viewerId && (
+          <div>
+            <span>viewerId:</span>
+            <span>{project.viewerId}</span>
+          </div>
+        )}
       </div>
     );
   }

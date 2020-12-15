@@ -7,7 +7,7 @@ function* getDataFromActiveTabSaga() {
   yield call(getDataFromActiveTab);
 }
 
-export function* setDataFromActiveTabSaga(data) {
+export function* setDataFromActiveTabSaga(data, source) {
   const {
     editorInfo,
     sessionStore,
@@ -17,6 +17,7 @@ export function* setDataFromActiveTabSaga(data) {
     const action = update({
       editorInfo,
       sessionStore,
+      source,
     });
     yield put(action);
   } else {

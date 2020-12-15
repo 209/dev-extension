@@ -1,6 +1,6 @@
-function getDataForDevExtension() {
+function getDataForDevExtension(method) {
   postMessage({
-    method:       'dev-extension:deep-inject',
+    method,
     sessionStore: window.JSON.stringify(window.JSFillerStores.sessionStore),
   });
 }

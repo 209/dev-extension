@@ -1,15 +1,16 @@
 import * as actionTypes from './actionTypes';
 
 const initialState = {
-  editorInfo: false,
+  editorInfo: '',
 };
 
 const actionsMap = {
-  [actionTypes.UPDATE](state, { editorInfo, sessionStore }) {
+  [actionTypes.UPDATE](state, { editorInfo, sessionStore, source }) {
     return {
       ...state,
       editorInfo,
       sessionStore,
+      source,
     };
   },
   [actionTypes.CLEAR]() {

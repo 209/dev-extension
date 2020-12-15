@@ -1,10 +1,8 @@
 import browser from 'webextension-polyfill';
-import { all, call, take, put } from 'redux-saga/effects';
+import { all, call, take } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
-import { TAB_IS_EDITOR } from '../../../utils/constants';
-import { update } from '../activeTab/actions';
-import getDataFromActiveTab from './utils/getDataFromActiveTab';
 import { setDataFromActiveTabSaga } from '../activeTab/saga';
+import { DEEP_INJECT_GET_DATA } from '../../../utils/constants';
 
 function* BrowserEventsListener() {
   return eventChannel((emit) => {
@@ -28,10 +26,16 @@ export function* init() {
   const chromeEventsChannel = yield call(BrowserEventsListener);
 
   while (true) {
-    const { data, source } = yield take(chromeEventsChannel);
-    switch (data.method) {
-      case 'dev-extension:deep-inject':
-        yield setDataFromActiveTabSaga(data.data);
+    const { data: rawData } = yield take(chromeEventsChannel);
+    // сюда проваливаются иногда события из вкладок без pdfFiller
+    if (!rawData || !rawData.data) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+    const { data, source } = rawData;
+    switch (rawData.method) {
+      case DEEP_INJECT_GET_DATA:
+        yield setDataFromActiveTabSaga(data, source);
         break;
       default:
         break;
